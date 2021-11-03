@@ -21,4 +21,5 @@ interface SistemaIMPL {
 	
 	//** nuevos
 	public Personajes getPersonajes();
+	public String[] getBanList();
 }
