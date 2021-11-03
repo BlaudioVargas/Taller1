@@ -48,7 +48,25 @@ public class Taller1 {
 	}
 
 	private static void newUser(SistemaIMPL system, Usuario user) {
-		
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+		System.out.println("Usuario no existe");
+		System.out.println("Desea crar un nuevo Usuario");
+		System.out.println("Y/N");
+		String clave =sc.nextLine();
+		if(((clave).equals("y")||(clave).equals("Y")))
+		{
+			system.addUser(name);
+		}
+		else if((clave).equals("n")||(clave).equals("N"))
+		{
+			/// NO SE HACE NADA
+		}
+		else
+		{
+			System.out.println("ERROR COMANDO NO RECONOCIDO");
+		}
+		System.out.println("Volviendo al principio de la operacion");
 	}
 
 	private static void menuUser(SistemaIMPL system, Usuario user) {
