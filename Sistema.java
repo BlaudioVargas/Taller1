@@ -2,6 +2,9 @@ package Taller1;
 
 
 public class Sistema implements SistemaIMPL{
+	public Usuarios user;
+	public Personajes characters;
+	public String[] banList;
 
 	@Override
 	public boolean load() {
@@ -86,6 +89,11 @@ public class Sistema implements SistemaIMPL{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public String[] getBanList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
