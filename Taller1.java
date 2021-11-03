@@ -32,7 +32,7 @@ public class Taller1 {
 		else if((seleccion).equals("ADMIN")){
 			menuAdmin(system);
 		}
-		else{
+		else  if(!(Arrays.asList(system.getBanList()).contains(seleccion))){
 			Usuario user = getUsuario(system, seleccion);
 			if(user!=null) {
 				menuUser(system, user);
@@ -40,6 +40,9 @@ public class Taller1 {
 			else {
 				newUser(system, user);
 			}
+		}
+		else {
+			System.out.println("ERROR: EL USUARIO: '"+seleccion+"' SE ENCUENTRA BLOQUEADO DEL SISTEMA");
 		}
 		return true;
 	}
