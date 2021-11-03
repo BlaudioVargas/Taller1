@@ -18,4 +18,7 @@ interface SistemaIMPL {
 	public boolean savePersonaje();
 	public boolean saveCuentas();
 	public boolean saveEstadisticas();
+	
+	//** nuevos
+	public Personajes getPersonajes();
 }
