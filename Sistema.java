@@ -80,6 +80,12 @@ public class Sistema implements SistemaIMPL{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public Personajes getPersonajes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }
