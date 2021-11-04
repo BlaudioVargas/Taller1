@@ -7,14 +7,16 @@ public class Usuario {
 	private int lvl;
 	private int balance;
 	private Inventario items;
+	private String region;//////////////
 	
-	public Usuario(String name, String password, String alias, int lvl, int balance, Inventario items) {
+	public Usuario(String name, String password, String alias, int lvl, int balance, Inventario items, String region) {
 		this.name=name;
 		this.password=password;
 		this.alias=alias;
 		this.lvl=lvl;
 		this.balance=balance;
 		this.items=items;
+		this.region=region;
 	}
 	
 	public void setPassword(String password) {
@@ -71,4 +73,7 @@ public class Usuario {
 		return this.items;
 	}
 	
+	public String getRegion() {///////////
+		return this.region;
+	}
 }
