@@ -79,6 +79,85 @@ public class Taller1 {
 	private static void menuUser(SistemaIMPL system, Usuario user) {
 		
 	}
+	
+	private static boolean buySkin(SistemaIMPL system, Usuario user) {
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+		System.out.println("Indique el nombre del campeon al que le desea comprar su Skin");
+		String campeon =sc.nextLine();
+		Personaje aux = system.searchCharacter(campeon);
+		Inventario temp = getInventario(user, campeon);
+		if(temp!=null) {
+			Apariencias indice = aux.getSkins();
+			System.out.println("Campeon :"+aux.getName());
+			int contador =1;
+			while(indice!=null) {
+				int costo = getCosto(indice.getSkins().getRarity());
+				boolean existe = chekExistence(indice.getSkins().getName(),temp.getSkins());
+				if(costo>0 && !existe) {
+					System.out.println("Skin "+contador+": "+indice.getSkins().getName()+"- Valor :"+costo);
+					contador++;
+				}
+				indice=indice.getNext();
+			}
+			System.out.println("Indique el nombre de la Skin que desea comprar");
+			String buySkin =sc.nextLine();
+			boolean existe = chekExistence(buySkin,temp.getSkins());
+			if(!existe) {
+				Apariencia tempskin=system.searchSkin(aux, buySkin);
+				if(tempskin!=null) {
+					int costo = getCosto(tempskin.getRarity());
+					if(costo>=user.getBalance()) {
+						Apariencias newSkin = new Apariencias (tempskin);
+						newSkin.setNext(temp.getSkins());
+						temp.setSkins(newSkin);
+						user.setBalance(-costo);
+						System.out.println("Se compro con exito la Skin: "+tempskin.getName()+" ("+tempskin.getRarity()+") del personaje "+aux.getName()+" por un valor de :"+costo+" RPs");
+					}
+					else {
+						System.out.println("ERROR EL SALDO DE SU CUENTA ES INSUFICIENTE POR :"+(costo-user.getBalance())+"RPs");
+					}
+				}
+				else {
+					System.out.println("ERROR SKIN LA SKIN DESEADA NO EXISTE");
+				}
+			}
+			else {
+				System.out.println("ERROR YA POSEE ESA SKIN");
+			}
+		}
+		else {
+			if(aux!=null) {
+				System.out.println("ERROR NO TIENE POSECION DEL CAMPEON");
+			}
+			else {
+				System.out.println("ERROR NO EXISTE EL CAMPEON");
+			}
+		}
+		return false;
+	}
+
+	
+
+	private static boolean buyCharacter(SistemaIMPL system, Usuario user) {
+		return false;
+	}
+
+	private static boolean showSkinNotOwn(SistemaIMPL system, Usuario user) {
+		return false;
+	}
+
+	private static boolean showInventory(SistemaIMPL system, Usuario user) {
+		return false;
+	}
+
+	private static boolean rechargeRP(SistemaIMPL system, Usuario user) {
+		return false;
+	}
+
+	private static boolean infoUser(SistemaIMPL system, Usuario user) {
+		return false;
+	}
 
 	private static void menuAdmin(SistemaIMPL system) {
 		
@@ -93,5 +172,45 @@ public class Taller1 {
 			indice=indice.getNext();
 		}
 		return null;
+	}
+	
+	private static Inventario getInventario(Usuario user, String campeon) {
+		Inventario indice = user.getInventario();
+		while(indice!=null) {
+			if(indice.getCharater().getName().equals(campeon)) {
+				return indice;
+			}
+			indice=indice.getNext();
+		}
+		return null;
+	}
+	
+	private static int getCosto(String rarity) {
+		if(rarity.equals("N")) {
+			return 975;
+		}
+		else if(rarity.equals("E")) {
+			return 1350;
+		}
+		else if(rarity.equals("L")) {
+			return 1820;
+		}
+		else if(rarity.equals("D")) {
+			return 2750;
+		}
+		else if(rarity.equals("M")) {
+			return 3250;
+		}
+		return 0;
+	}
+	
+	private static boolean chekExistence(String name, Apariencias skins) {
+		while(skins!=null) {
+			if(skins.getSkins().getName().equals(name)) {
+				return true;
+			}
+			skins=skins.getNext();
+		}
+		return false;
 	}
 }
