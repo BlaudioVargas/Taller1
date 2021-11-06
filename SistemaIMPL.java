@@ -22,4 +22,7 @@ interface SistemaIMPL {
 	//** nuevos
 	public Personajes getPersonajes();
 	public String[] getBanList();
+	
+	public Apariencia searchSkin(Personaje tempCharacter, String nameskin); 
+	public Personaje searchCharacter(String namecharacter);
 }
