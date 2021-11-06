@@ -180,7 +180,29 @@ public class Taller1 {
 	}
 
 	private static boolean showSkinNotOwn(SistemaIMPL system, Usuario user) {
-		return false;
+		System.out.println("Skins por campeon no obtenidas");
+		Personajes indexCharacter = system.getPersonajes();
+		int contador =1;
+		while(indexCharacter!=null) {
+			Inventario indexPosecion = getInventario(user, indexCharacter.getCharacter().getName());
+			System.out.println(contador+") Campeon :"+indexCharacter.getCharacter().getName());
+			Apariencias indexSkins = indexCharacter.getCharacter().getSkins();
+			int cont =1;
+			while(indexSkins!=null) {
+				boolean existe =false;
+				if(indexPosecion!=null) {
+					existe =chekExistenceSkin(indexSkins.getSkins().getName(), indexPosecion.getSkins());
+				}
+				if(!existe) {
+					System.out.println("---"+cont+"> Skin: "+indexSkins.getSkins().getName()+"; Rareza"+indexSkins.getSkins().getRarity()+"; Costo ="+getCosto(indexSkins.getSkins().getRarity()));
+				}
+				indexSkins=indexSkins.getNext();
+				cont++;
+			}
+			contador++;
+			indexCharacter=indexCharacter.getNext();
+		}
+		return true;
 	}
 
 	private static boolean showInventory(SistemaIMPL system, Usuario user) {
