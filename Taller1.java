@@ -35,7 +35,14 @@ public class Taller1 {
 		else  if(!(Arrays.asList(system.getBanList()).contains(seleccion))){
 			Usuario user = getUsuario(system, seleccion);
 			if(user!=null) {
-				menuUser(system, user);
+				System.out.println("Indique la clave de Usario:");
+				String clave = sc.nextLine();
+				if(user.getPassword().equals(clave)) {
+					menuUser(system, user);
+				}
+				else {
+					System.out.println("ERROR CLAVE INVALIDA");
+				}
 			}
 			else {
 				newUser(system, user);
