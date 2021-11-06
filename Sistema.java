@@ -178,7 +178,7 @@ public class Sistema implements SistemaIMPL{
 	}
 
 //////////////////////////////////////////////////////////////////--------
-	private Apariencia searchSkin(Personaje tempCharacter, String nameskin) {
+	public Apariencia searchSkin(Personaje tempCharacter, String nameskin) {
 		// TODO Auto-generated method stub
 		Apariencias temp = tempCharacter.getSkins();
 		while(temp!=null) {
@@ -190,7 +190,7 @@ public class Sistema implements SistemaIMPL{
 		return null;
 	}
 
-	private Personaje searchCharacter(String namecharacter) {
+	public Personaje searchCharacter(String namecharacter) {
 		// TODO Auto-generated method stub
 		Personajes temp=characters;
 		while(temp!=null) {
