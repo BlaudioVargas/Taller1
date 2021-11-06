@@ -93,7 +93,7 @@ public class Taller1 {
 			int contador =1;
 			while(indice!=null) {
 				int costo = getCosto(indice.getSkins().getRarity());
-				boolean existe = chekExistence(indice.getSkins().getName(),temp.getSkins());
+				boolean existe = chekExistenceSkin(indice.getSkins().getName(),temp.getSkins());
 				if(costo>0 && !existe) {
 					System.out.println("Skin "+contador+": "+indice.getSkins().getName()+"- Valor :"+costo);
 					contador++;
@@ -102,7 +102,7 @@ public class Taller1 {
 			}
 			System.out.println("Indique el nombre de la Skin que desea comprar");
 			String buySkin =sc.nextLine();
-			boolean existe = chekExistence(buySkin,temp.getSkins());
+			boolean existe = chekExistenceSkin(buySkin,temp.getSkins());
 			if(!existe) {
 				Apariencia tempskin=system.searchSkin(aux, buySkin);
 				if(tempskin!=null) {
@@ -140,6 +140,42 @@ public class Taller1 {
 	
 
 	private static boolean buyCharacter(SistemaIMPL system, Usuario user) {
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+		Personajes indice = system.getPersonajes();
+		System.out.println("Listado de campeones:");
+		int contador =1;
+		while(indice!=null) {
+			System.out.println(contador+") "+indice.getCharacter().getName()+" Costo: 975 RPs");
+			contador++;
+			indice=indice.getNext();
+		}
+		
+		System.out.println("Indique el nombre del campeon que desea comprar");
+		String campeon =sc.nextLine();
+		Personaje aux = system.searchCharacter(campeon);
+		Inventario temp = getInventario(user, campeon);
+		if(temp==null && aux!=null) {
+			if(user.getBalance()>=975) {
+				Inventario newCharacter = new Inventario(aux,null);
+				newCharacter.setNext(temp);
+				user.setInventario(newCharacter);
+				user.setBalance(-975);
+				System.out.println("Se compro con exito al personaje: "+aux.getName()+" por un valor de : 975 RPs");
+				return true;
+			}
+			else {
+				System.out.println("ERROR EL SALDO DE SU CUENTA ES INSUFICIENTE POR :"+(975-user.getBalance())+"RPs");
+			}
+		}
+		else {
+			if(aux!=null) {
+				System.out.println("ERROR YA TIENE POSECION DEL CAMPEON");
+			}
+			else {
+				System.out.println("ERROR NO EXISTE EL CAMPEON");
+			}
+		}
 		return false;
 	}
 
@@ -204,7 +240,7 @@ public class Taller1 {
 		return 0;
 	}
 	
-	private static boolean chekExistence(String name, Apariencias skins) {
+	private static boolean chekExistenceSkin(String name, Apariencias skins) {
 		while(skins!=null) {
 			if(skins.getSkins().getName().equals(name)) {
 				return true;
