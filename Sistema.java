@@ -93,6 +93,7 @@ public class Sistema implements SistemaIMPL{
 				int i;
 				Inventario newItem = null;
 				Inventario indiceItem = null;
+				int totalCharacter=0;
 				for(i=5;i<(tamano-1);i++) {
 					String namecharacter =partes[i];
 					Personaje tempCharacter=searchCharacter(namecharacter);
@@ -116,6 +117,7 @@ public class Sistema implements SistemaIMPL{
 								}
 							}
 						}
+						totalCharacter++;
 					}
 					else {
 						i+=totalskin;
@@ -132,7 +134,7 @@ public class Sistema implements SistemaIMPL{
 				String region =partes[i];
 				//---------------------------
 				
-				Usuario newUser= new Usuario(name, password, nickname, lvl, saldo, newItem ,region);
+				Usuario newUser= new Usuario(name, password, nickname, lvl, saldo, totalCharacter, newItem ,region);
 				if(characters==null) {
 					user = new Usuarios(newUser);
 					temp=user;
@@ -227,7 +229,7 @@ public class Sistema implements SistemaIMPL{
 			}
 		}
 		
-		Usuario newUser= new Usuario(name, clave, nickmane, 0, 0, null ,region);
+		Usuario newUser= new Usuario(name, clave, nickmane, 0, 0, 0, null ,region);
 		Usuarios usertemp = new Usuarios(newUser);
 		usertemp.setNext(user);
 		this.user=usertemp;
