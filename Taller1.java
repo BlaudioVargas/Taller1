@@ -113,6 +113,7 @@ public class Taller1 {
 						temp.setSkins(newSkin);
 						user.setBalance(-costo);
 						user.setLVL(1);
+						aux.setBalance(costo);
 						System.out.println("Se compro con exito la Skin: "+tempskin.getName()+" ("+tempskin.getRarity()+") del personaje "+aux.getName()+" por un valor de :"+costo+" RPs");
 					}
 					else {
@@ -165,6 +166,7 @@ public class Taller1 {
 					user.setBalance(-975);
 					user.setLVL(1);
 					user.setTotal(1);
+					aux.setBalance(975);
 					System.out.println("Se compro con exito al personaje: "+aux.getName()+" por un valor de : 975 RPs");
 					return true;
 				}
