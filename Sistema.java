@@ -261,26 +261,104 @@ public class Sistema implements SistemaIMPL{
 
 	@Override
 	public boolean save() {
-		// TODO Auto-generated method stub
-		return false;
+		savePersonaje();
+		saveEstadisticas();
+		saveCuentas();
+		return true;
 	}
 
 	@Override
 	public boolean savePersonaje() {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			File archivo = new File ("src/Taller1/Personajes.txt"); 
+			FileWriter text = new FileWriter (archivo); 
+			BufferedWriter wr = new BufferedWriter(text);
+			Personajes indiceCharacter = characters;
+			while(indiceCharacter!=null) {
+				String name =indiceCharacter.getCharacter().getName();
+				String rol =indiceCharacter.getCharacter().getRol();
+				int total =0;
+				String skins="";
+				Apariencias indiceSkins=indiceCharacter.getCharacter().getSkins();
+				while(indiceSkins!=null){
+					String nameSkin=indiceSkins.getSkins().getName();
+					String rarezaSkin=indiceSkins.getSkins().getRarity();
+					skins=skins+","+nameSkin+","+rarezaSkin;
+					total++;
+					indiceSkins=indiceSkins.getNext();
+				}
+				wr.write(name+","+rol+","+total+skins+"\n");
+				indiceCharacter=indiceCharacter.getNext();
+			}
+			wr.close();
+			return true;
+		}
+		catch (Exception e) {
+			System.out.println("ARCHIVO NO GUARDADO");
+			return false;
+		}
 	}
 
 	@Override
 	public boolean saveCuentas() {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			File archivo = new File ("src/Taller1/Cuentas.txt"); 
+			FileWriter text = new FileWriter (archivo); 
+			BufferedWriter wr = new BufferedWriter(text);
+			Usuarios indiceUsers = user;
+			while(indiceUsers!=null) {
+				String name =indiceUsers.getUser().getName();
+				String password =indiceUsers.getUser().getPassword();
+				String nick =indiceUsers.getUser().getAlias();
+				int LVL =indiceUsers.getUser().getLVL();
+				int RPs =indiceUsers.getUser().getBalance();
+				int total =indiceUsers.getUser().getTotal();
+				String listCharcater="";
+				String region = indiceUsers.getUser().getRegion();
+				Inventario indiceItem = indiceUsers.getUser().getInventario();
+				while(indiceItem!=null){
+					String namecharacter=indiceItem.getCharater().getName();
+					listCharcater=listCharcater+","+namecharacter;
+					Apariencias indiceSkins=indiceItem.getSkins();
+					while(indiceSkins!=null){
+						String nameSkin=indiceSkins.getSkins().getName();
+						listCharcater=listCharcater+","+nameSkin;
+						indiceSkins=indiceSkins.getNext();
+					}
+					indiceItem=indiceItem.getNext();
+				}
+				wr.write(name+","+password+","+nick+","+LVL+","+RPs+","+total+listCharcater+","+region+"\n");
+				indiceUsers=indiceUsers.getNext();
+			}
+			wr.close();
+			return true;
+		}
+		catch (Exception e) {
+			System.out.println("ARCHIVO NO GUARDADO");
+			return false;
+		}
 	}
 
 	@Override
 	public boolean saveEstadisticas() {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			File archivo = new File ("src/Taller1/Estadísticas.txt"); 
+			FileWriter text = new FileWriter (archivo); 
+			BufferedWriter wr = new BufferedWriter(text);
+			Personajes indiceCharacter = characters;
+			while(indiceCharacter!=null) {
+				String name =indiceCharacter.getCharacter().getName();
+				int balance =indiceCharacter.getCharacter().getBalance();
+				wr.write(name+","+balance+"\n");
+				indiceCharacter=indiceCharacter.getNext();
+			}
+			wr.close();
+			return true;
+		}
+		catch (Exception e) {
+			System.out.println("ARCHIVO NO GUARDADO");
+			return false;
+		}
 	}
 	
 	@Override
