@@ -262,7 +262,15 @@ public class Taller1 {
 			if(respuesta.equals(password)) {
 				System.out.println("Indique el nuevo password");
 				respuesta =sc.nextLine();
-				return true;
+				System.out.println("Indique  nuevamente el nuevo password");
+				String respuesta2 =sc.nextLine();
+				if(respuesta.equals(respuesta2)) {
+					user.setPassword(respuesta);
+					return true;
+				}
+				else{
+					System.out.println("ERROR CONFIRMACION DE PASWORD INVALIDO");
+				}
 			}
 			else {
 				System.out.println("ERROR PASWORD INVALIDO");
