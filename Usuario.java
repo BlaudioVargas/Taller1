@@ -8,6 +8,7 @@ public class Usuario {
 	private int balance;
 	private Inventario items;
 	private String region;//////////////
+	private int total;//////////////////
 	
 	public Usuario(String name, String password, String alias, int lvl, int balance, Inventario items, String region) {
 		this.name=name;
@@ -17,6 +18,7 @@ public class Usuario {
 		this.balance=balance;
 		this.items=items;
 		this.region=region;
+		this.total=total;////
 	}
 	
 	public void setPassword(String password) {
@@ -25,6 +27,10 @@ public class Usuario {
 	
 	public void setLVL(int lvl) {
 		this.lvl+=lvl;
+	}
+	
+	public void setTotal(int total) {/////////
+		this.total+=total;
 	}
 	
 	public void setBalance(int balance) {
@@ -63,6 +69,10 @@ public class Usuario {
 	
 	public int getLVL() {
 		return this.lvl;
+	}
+	
+	public int getTotal() {//////
+		return this.total;
 	}
 	
 	public int getBalance() {
