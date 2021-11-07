@@ -112,6 +112,7 @@ public class Taller1 {
 						newSkin.setNext(temp.getSkins());
 						temp.setSkins(newSkin);
 						user.setBalance(-costo);
+						user.setLVL(1);
 						System.out.println("Se compro con exito la Skin: "+tempskin.getName()+" ("+tempskin.getRarity()+") del personaje "+aux.getName()+" por un valor de :"+costo+" RPs");
 					}
 					else {
@@ -161,6 +162,7 @@ public class Taller1 {
 				newCharacter.setNext(temp);
 				user.setInventario(newCharacter);
 				user.setBalance(-975);
+				user.setLVL(1);
 				System.out.println("Se compro con exito al personaje: "+aux.getName()+" por un valor de : 975 RPs");
 				return true;
 			}
@@ -206,10 +208,35 @@ public class Taller1 {
 	}
 
 	private static boolean showInventory(SistemaIMPL system, Usuario user) {
-		return false;
+		System.out.println("Inventario del usuario : "+user.getName());
+		Inventario indexPosecion = user.getInventario();
+		int contador =1;
+		while(indexPosecion!=null) {
+			System.out.println(contador+") Campeon :"+indexPosecion.getCharater().getName());
+			Apariencias indexSkins = indexPosecion.getSkins();
+			int cont =1;
+			while(indexSkins!=null) {
+				System.out.println("---"+cont+"> Skin: "+indexSkins.getSkins().getName()+"; Rareza"+indexSkins.getSkins().getRarity());
+				cont++;
+			}
+			contador++;
+			indexPosecion=indexPosecion.getNext();
+		}
+		return true;
 	}
 
 	private static boolean rechargeRP(SistemaIMPL system, Usuario user) {
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+		System.out.println("Recargar saldo a la cuenta: "+user.getName()+"/ Balance actual: "+user.getBalance());
+		System.out.println("Inique el saldo a ingresar");
+		int fondos = sc.nextInt();
+		if (fondos>0) {
+			user.setBalance(fondos);
+			System.out.println("Operacion realizada con exito balance actual: "+user.getBalance());
+			return true;
+		}
+		System.out.println("ERROR INGRESO NO VALIDO");
 		return false;
 	}
 
