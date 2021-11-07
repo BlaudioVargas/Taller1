@@ -207,7 +207,7 @@ public class Taller1 {
 		return true;
 	}
 
-	private static boolean showInventory(SistemaIMPL system, Usuario user) {
+	private static boolean showInventory( Usuario user) {
 		System.out.println("Inventario del usuario : "+user.getName());
 		Inventario indexPosecion = user.getInventario();
 		int contador =1;
@@ -225,7 +225,7 @@ public class Taller1 {
 		return true;
 	}
 
-	private static boolean rechargeRP(SistemaIMPL system, Usuario user) {
+	private static boolean rechargeRP( Usuario user) {
 		@SuppressWarnings("resource")
 		var sc= new Scanner(System.in);
 		System.out.println("Recargar saldo a la cuenta: "+user.getName()+"/ Balance actual: "+user.getBalance());
@@ -240,7 +240,7 @@ public class Taller1 {
 		return false;
 	}
 
-	private static boolean infoUser(SistemaIMPL system, Usuario user) {
+	private static boolean infoUser( Usuario user) {
 		return false;
 	}
 
