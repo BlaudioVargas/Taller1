@@ -38,7 +38,7 @@ public class Sistema implements SistemaIMPL{
 				int tamano = partes.length;
 				Apariencias skinstemp=null;
 				Apariencias skinsindice=null;
-				for(int i=2;i<tamano;i+=2) {
+				for(int i=3;i<tamano;i+=2) {
 					String nameskin =partes[i];
 					String rarityskin =partes[i+1];
 					Apariencia newskin = new Apariencia(nameskin, rarityskin);
