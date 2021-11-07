@@ -205,8 +205,32 @@ public class Sistema implements SistemaIMPL{
 	
 	@Override
 	public void addUser(String name) {
-		// TODO Auto-generated method stub
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+		System.out.println("Usuario a crear: "+name);
+		System.out.println("Indique la contraseña");
+		String clave =sc.nextLine();
+		System.out.println("Indique su apodo");
+		String nickmane =sc.nextLine();
+		boolean continuar=true;
+		String region ="LAS";
+		while(continuar) {
+			String regionn="LAS/LAN/EUW/KR/NA/RU";
+			String[] regiones = regionn.split("/");
+			System.out.println("Indique su region : LAS / LAN / EUW / KR / NA / RU");
+			region =sc.nextLine();
+			if(Arrays.asList(regiones).contains(region)) {
+				continuar = false;
+			}
+			else {
+				System.out.println("ERROR REGION NO RECONOCIDA");
+			}
+		}
 		
+		Usuario newUser= new Usuario(name, clave, nickmane, 0, 0, null ,region);
+		Usuarios usertemp = new Usuarios(newUser);
+		usertemp.setNext(user);
+		this.user=usertemp;
 	}
 
 	@Override
