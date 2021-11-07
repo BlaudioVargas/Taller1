@@ -241,6 +241,33 @@ public class Taller1 {
 	}
 
 	private static boolean infoUser( Usuario user) {
+		String name =user.getName();
+		String nickName= user.getAlias();
+		String password= user.getPassword();
+		int saldo = user.getBalance();
+		int lvl = user.getLVL();
+		String passwordCensurado=censurarPassword(password);
+		System.out.println("Nombre Usuario: "+name);
+		System.out.println("Apodo: "+nickName);
+		System.out.println("Contraseña: "+passwordCensurado);
+		System.out.println("Saldo: "+saldo);
+		System.out.println("Nivel: "+lvl);
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+		System.out.println("Desea cambiar el password S/N");
+		String respuesta =sc.nextLine();
+		if(respuesta.equals("s")|respuesta.equals("S")){
+			System.out.println("Indique el password actual");
+			respuesta =sc.nextLine();
+			if(respuesta.equals(password)) {
+				System.out.println("Indique el nuevo password");
+				respuesta =sc.nextLine();
+				return true;
+			}
+			else {
+				System.out.println("ERROR PASWORD INVALIDO");
+			}
+		}
 		return false;
 	}
 
@@ -297,5 +324,19 @@ public class Taller1 {
 			skins=skins.getNext();
 		}
 		return false;
+	}
+	
+	private static String censurarPassword(String password) {
+		String passwordCensurado="";
+		String[] partes = password.split("");
+		int tamano = partes.length;
+		if (tamano>3) {
+			int censurar = tamano-3;
+			for(int j = 0;j<censurar;j++) {
+				passwordCensurado=passwordCensurado+"*";
+			}
+		}
+		passwordCensurado=passwordCensurado+partes[tamano-3]+partes[tamano-2]+partes[tamano-1];
+		return passwordCensurado;
 	}
 }
