@@ -174,7 +174,7 @@ public class Sistema implements SistemaIMPL{
 			 return true;
 		}
 		catch (Exception e) {
-			System.out.println("ARCHIVO DE PERSONAJES CORRUPTO/INEXISTENTE");
+			System.out.println("ARCHIVO DE ESTADISTICAS CORRUPTO/INEXISTENTE");
 			return false;
 		}
 	}
