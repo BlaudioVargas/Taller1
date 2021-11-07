@@ -1,10 +1,23 @@
 package Taller1;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Sistema implements SistemaIMPL{
+	
 	public Usuarios user;
 	public Personajes characters;
 	public String[] banList;
+	
+	public Sistema() {
+		user = null;
+		characters = null;
+		banList = null;
+	}
 
 	@Override
 	public boolean load() {
@@ -88,25 +101,24 @@ public class Sistema implements SistemaIMPL{
 				int lvl =Integer.parseInt(partes[3]);
 				int saldo =Integer.parseInt(partes[4]);
 				//----------------------------
-				int totalPersonajes =Integer.parseInt(partes[5]);
 				int tamano = partes.length;
 				int i;
 				Inventario newItem = null;
 				Inventario indiceItem = null;
 				int totalCharacter=0;
-				for(i=5;i<(tamano-1);i++) {
+				for(i=6;i<(tamano-1);i++) {
 					String namecharacter =partes[i];
 					Personaje tempCharacter=searchCharacter(namecharacter);
 					i++;
 					int totalskin =Integer.parseInt(partes[i]);
 					Apariencias skinstemp=null;
+					Apariencias skinsindice=null;
 					if(tempCharacter!=null) {
-						Apariencias skinsindice=null;
 						for(int j =0;j<totalskin;j++) {
 							i++;
 							String nameskin =partes[i];
 							Apariencia tempskin=searchSkin(tempCharacter, nameskin);
-							if(tempskin==null) {
+							if(tempskin!=null) {
 								if(skinstemp==null) {
 									skinstemp = new Apariencias(tempskin);
 									skinsindice=skinstemp;
@@ -135,7 +147,7 @@ public class Sistema implements SistemaIMPL{
 				//---------------------------
 				
 				Usuario newUser= new Usuario(name, password, nickname, lvl, saldo, totalCharacter, newItem ,region);
-				if(characters==null) {
+				if(user==null) {
 					user = new Usuarios(newUser);
 					temp=user;
 				}
@@ -178,7 +190,6 @@ public class Sistema implements SistemaIMPL{
 			return false;
 		}
 	}
-
 //////////////////////////////////////////////////////////////////--------
 	public Apariencia searchSkin(Personaje tempCharacter, String nameskin) {
 		// TODO Auto-generated method stub
@@ -204,7 +215,6 @@ public class Sistema implements SistemaIMPL{
 		return null;
 	}
 //////////////////////////////////////////////////////////////////--------	
-	
 	@Override
 	public void addUser(String name) {
 		@SuppressWarnings("resource")
@@ -256,7 +266,7 @@ public class Sistema implements SistemaIMPL{
 	@Override
 	public Usuarios getUsers() {
 		// TODO Auto-generated method stub
-		return null;
+		return user;
 	}
 
 	@Override
@@ -302,7 +312,7 @@ public class Sistema implements SistemaIMPL{
 	@Override
 	public boolean saveCuentas() {
 		try {
-			File archivo = new File ("src/Taller1/Cuentas.txt"); 
+			File archivo = new File ("src/Taller1/Cuentas2.txt"); 
 			FileWriter text = new FileWriter (archivo); 
 			BufferedWriter wr = new BufferedWriter(text);
 			Usuarios indiceUsers = user;
@@ -320,11 +330,15 @@ public class Sistema implements SistemaIMPL{
 					String namecharacter=indiceItem.getCharater().getName();
 					listCharcater=listCharcater+","+namecharacter;
 					Apariencias indiceSkins=indiceItem.getSkins();
+					int contador =0;
+					String listaSkins="";
 					while(indiceSkins!=null){
 						String nameSkin=indiceSkins.getSkins().getName();
-						listCharcater=listCharcater+","+nameSkin;
+						listaSkins=listaSkins+","+nameSkin;
 						indiceSkins=indiceSkins.getNext();
+						contador++;
 					}
+					listCharcater=listCharcater+","+contador+listaSkins;
 					indiceItem=indiceItem.getNext();
 				}
 				wr.write(name+","+password+","+nick+","+LVL+","+RPs+","+total+listCharcater+","+region+"\n");
@@ -360,17 +374,16 @@ public class Sistema implements SistemaIMPL{
 			return false;
 		}
 	}
-	
+
 	@Override
 	public Personajes getPersonajes() {
-		// TODO Auto-generated method stub
-		return null;
+		return characters;
 	}
-	
+
 	@Override
 	public String[] getBanList() {
-		// TODO Auto-generated method stub
-		return null;
+		return banList;
 	}
+
 
 }
