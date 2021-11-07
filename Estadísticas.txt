@@ -1,0 +1,6 @@
+Jinx,0
+Sett,0
+Lillia,0
+Vex,0
+Jhin,0
+Kaisa,0
