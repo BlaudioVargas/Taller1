@@ -10,7 +10,7 @@ public class Usuario {
 	private String region;//////////////
 	private int total;//////////////////
 	
-	public Usuario(String name, String password, String alias, int lvl, int balance, Inventario items, String region) {
+	public Usuario(String name, String password, String alias, int lvl, int balance, int total, Inventario items, String region) {
 		this.name=name;
 		this.password=password;
 		this.alias=alias;
