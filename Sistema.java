@@ -17,6 +17,7 @@ public class Sistema implements SistemaIMPL{
 		user = null;
 		characters = null;
 		banList = new String[999];
+		banList[0]="X";
 	}
 
 	@Override
