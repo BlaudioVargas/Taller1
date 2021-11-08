@@ -77,13 +77,53 @@ public class Taller1 {
 	}
 
 	private static void menuUser(SistemaIMPL system, Usuario user) {
-		
+		private static void menuUser(SistemaIMPL system, Usuario user) {
+		boolean valido = true;
+		while(valido) {
+			@SuppressWarnings("resource")
+			var sc= new Scanner(System.in);
+			
+			System.out.println("1)Compra de skins");
+			System.out.println("2)Compra de personajes");
+			System.out.println("3)Mostrar las skins disponibles");
+			System.out.println("4)Mostrar el inventario");
+			System.out.println("5)recargar RP");
+			System.out.println("6)Mostrar datos de la cuenta");
+			System.out.println("0)Salir");
+			String respuesta = sc.nextLine();
+			if(respuesta.equals("1")) {
+				buySkin(system,user);
+			}
+			else if(respuesta.equals("2")) {
+				buyCharacter(system,user);		
+			}
+			else if(respuesta.equals("3")) {
+				showSkinNotOwn(system,user);
+			}
+			else if(respuesta.equals("4")) {
+				showInventory(user);
+			}
+			else if(respuesta.equals("5")) {
+				rechargeRP(user);
+			}
+			else if(respuesta.equals("6")) {
+				infoUser(user);
+			}
+			
+			else if(respuesta.equals("0")) {
+				valido = false;
+				System.out.println("Saliendo de menú usario");
+			}
+			else {
+				System.out.println("ERROR RESPUESTA NO VALIDA");
+			}
+		}
 	}
 	
 	private static boolean buySkin(SistemaIMPL system, Usuario user) {
 		@SuppressWarnings("resource")
 		var sc= new Scanner(System.in);
-		System.out.println("Indique el nombre del campeon al que le desea comprar su Skin");
+		System.out.println("Indique el nombre del campeón al que le desea comprar su Skin");
 		String campeon =sc.nextLine();
 		Personaje aux = system.searchCharacter(campeon);
 		Inventario temp = getInventario(user, campeon);
