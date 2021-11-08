@@ -247,8 +247,53 @@ public class Sistema implements SistemaIMPL{
 
 	@Override
 	public boolean addNewCharacter() {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			@SuppressWarnings("resource")
+			var sc= new Scanner(System.in);
+			System.out.println("Indique el nombre del nuevo personaje a agregar: ");
+			String name = sc.nextLine();
+			boolean continuar=true;
+			String clase ="SUP";
+			while(continuar) {
+				String clasess="SUP/ADC/TOP/MID/JG";
+				String[] clases = clasess.split("/");
+				System.out.println("Indique su rol : SUP / ADC / TOP / MID / JG");
+				clase =sc.nextLine();
+				if(Arrays.asList(clases).contains(clase)) {
+					continuar = false;
+				}
+				else {
+					System.out.println("ERROR ROL NO RECONOCIDO");
+				}
+			}
+			System.out.println("Indique el nombre de la Skin del nuevo personaje a agregar: ");
+			String Skin = sc.nextLine();
+			continuar=true;
+			String rareza ="N";
+			while(continuar) {
+				String clasess="N/E/L/D/M";
+				String[] clases = clasess.split("/");
+				System.out.println("Indique su rol : N / E / L / D / M");
+				clase =sc.nextLine();
+				if(Arrays.asList(clases).contains(clase)) {
+					continuar = false;
+				}
+				else {
+					System.out.println("ERROR RAREZA NO RECONOCIDO");
+				}
+			}
+			Apariencia firstSkin = new Apariencia(Skin, rareza);
+			Apariencias item = new Apariencias(firstSkin);
+			Personaje addNewCharacter= new Personaje(name, clase, 0, item);
+			Personajes characterstemp = new Personajes(addNewCharacter);
+			characterstemp.setNext(characters);
+			this.characters=characterstemp;
+			return true;
+		}
+		catch (Exception e) {
+			System.out.println("PERSOAJE NO VALIDO");
+			return false;
+		}
 	}
 
 	@Override
