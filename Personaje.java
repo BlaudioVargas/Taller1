@@ -18,11 +18,6 @@ public class Personaje {
 		return true;
 	}
 	
-	public boolean setSkins(Apariencias skins) {////
-		this.skins=skins;
-		return true;
-	}
-	
 	public boolean addSkins(Apariencia skin) {
 		Apariencias temporal = skins;
 		Apariencias auxiliar = new Apariencias(skin);
