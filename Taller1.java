@@ -354,8 +354,7 @@ public class Taller1 {
 				showInventory(user);
 			}*/
 			else if(respuesta.equals("5")) {
-				addNewCharacter(system,name);
-				
+				system.addNewCharacter();
 			}
 			else if(respuesta.equals("6")) {
 				addNewSkin(system,name);
@@ -377,32 +376,6 @@ public class Taller1 {
 	}
 		
 		///////////////////////////////////////////////////////////////////////----
-		
-	private static boolean addNewCharacter(SistemaIMPL system,String name) {
-		@SuppressWarnings("resource")
-		var sc= new Scanner(System.in);
-		System.out.println("Nombre de personaje a agregar: "+name);
-		boolean continuar=true;
-		String clase ="SUP";
-		while(continuar) {
-			String clasess="SUP/ADC/TOP/MID/JG";
-			String[] clases = clasess.split("/");
-			System.out.println("Indique su rol : SUP / ADC / TOP / MID / JG");
-			clase =sc.nextLine();
-			if(Arrays.asList(clases).contains(clase)) {
-				continuar = false;
-			}
-			else {
-				System.out.println("ERROR ROL NO RECONOCIDO");
-			}
-		}
-		Personaje addNewCharacter= new Personaje(name, clase, 0, skinstemp);
-		//Personaje addNewCharacter= new Personajes(name, clase, skinstemp);
-		Personajes characterstemp = new Personajes(addNewCharacter);
-		characterstemp.setNext(characters);
-		this.characters=characterstemp;
-
-	}
 		
 	private static boolean addNewSkin( SistemaIMPL system,String name,String nameskin ) {
 		@SuppressWarnings("resource")
