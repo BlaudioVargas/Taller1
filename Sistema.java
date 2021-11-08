@@ -312,7 +312,7 @@ public class Sistema implements SistemaIMPL{
 		while(continuar) {
 			String clasess="N/E/L/D/M";
 			String[] clases = clasess.split("/");
-			System.out.println("Indique su rol : N / E / L / D / M");
+			System.out.println("Indique su rareza : N / E / L / D / M");
 			rareza =sc.nextLine();
 			if(Arrays.asList(clases).contains(rareza)) {
 				continuar = false;
@@ -323,9 +323,8 @@ public class Sistema implements SistemaIMPL{
 		}
 		Apariencia skins = new Apariencia(Skin, rareza);
 		Apariencias item = new Apariencias(skins);
-		Personajes skinstemp = new apariencia(name, rareza);
-		skinstemp.setNext(nameskin);
-		this.nameskin=skinstemp;
+		item.setNext(aux.getSkins());
+		aux.setSkins(item);
 		return true;
 	}
 
