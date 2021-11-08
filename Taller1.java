@@ -201,7 +201,7 @@ public class Taller1 {
 			if(temp==null && aux!=null) {
 				if(user.getBalance()>=975) {
 					Inventario newCharacter = new Inventario(aux,null);
-					newCharacter.setNext(temp);
+					newCharacter.setNext(user.getInventario());
 					user.setInventario(newCharacter);
 					user.setBalance(-975);
 					user.setLVL(1);
