@@ -326,7 +326,7 @@ public class Taller1 {
 		}
 		return false;
 	}
-				///////////////////////////////////////////////////////////////////////----
+				
 	private static void menuAdmin(SistemaIMPL system) {
 		boolean valido = true;
 		while(valido) {
@@ -357,12 +357,12 @@ public class Taller1 {
 				system.addNewCharacter();
 			}
 			else if(respuesta.equals("6")) {
-				addNewSkin(system,name);
+				system.addNewSkin();
 			}
-			/*else if(respuesta.equals("7")) {
-				banUser(system);
+			else if(respuesta.equals("7")) {
+				system.banUser();
 			}
-			else if(respuesta.equals("8")) {
+			/*else if(respuesta.equals("8")) {
 				---(user);
 			}*/
 			else if(respuesta.equals("0")) {
@@ -375,35 +375,6 @@ public class Taller1 {
 		}
 	}
 		
-		///////////////////////////////////////////////////////////////////////----
-		
-	private static boolean addNewSkin( SistemaIMPL system,String name,String nameskin ) {
-		@SuppressWarnings("resource")
-		var sc= new Scanner(System.in);
-		System.out.println("Nombre del personaje al que se le desea agregar la skin: "+ name);
-		System.out.println("Nombre del la skin: "+ nameskin);
-		boolean continuar=true;
-		String rarityskin ="M";
-		while(continuar) {
-			String rarityskins="M/D/L/E/N";
-			String[] clases = rarityskins.split("/");
-			System.out.println("Indique la calidad de skin : M / D / L / E / N");
-			rarityskin =sc.nextLine();
-			if(Arrays.asList(clases).contains(rarityskin)) {
-				continuar = false;
-			}
-			else {
-				System.out.println("ERROR CALIDAD NO RECONOCIDA");
-			}
-			
-		}
-		Apariencia addNewSkin = new Apariencia(nameskin, rarityskin);
-		Apariencias skinstemp = new Apariencias(addNewSkin);
-		skinstemp.setNext();
-		this.=skinstemp;
-	}
-
-		///////////////////////////////////////////////////////////////////////----
 	private static Usuario getUsuario(SistemaIMPL system, String seleccion) {
 		Usuarios indice = system.getUsers();
 		while(indice!=null) {
