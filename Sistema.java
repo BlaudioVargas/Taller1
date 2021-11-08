@@ -298,8 +298,35 @@ public class Sistema implements SistemaIMPL{
 
 	@Override
 	public boolean addNewSkin() {
-		// TODO Auto-generated method stub
-		return false;
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+
+		System.out.println("Indique el nombre del campeon que desea agregar skin: ");
+		String campeon =sc.nextLine();
+		Personaje aux = searchCharacter(campeon);
+		boolean continuar =true;
+		System.out.println("Indique el nombre de la skin que desea agregar: ");
+		String Skin = sc.nextLine();
+		continuar=true;
+		String rareza ="N";
+		while(continuar) {
+			String clasess="N/E/L/D/M";
+			String[] clases = clasess.split("/");
+			System.out.println("Indique su rol : N / E / L / D / M");
+			rareza =sc.nextLine();
+			if(Arrays.asList(clases).contains(rareza)) {
+				continuar = false;
+			}
+			else {
+				System.out.println("ERROR RAREZA NO RECONOCIDO");
+			}
+		}
+		Apariencia skins = new Apariencia(Skin, rareza);
+		Apariencias item = new Apariencias(skins);
+		Personajes skinstemp = new apariencia(name, rareza);
+		skinstemp.setNext(nameskin);
+		this.nameskin=skinstemp;
+		return true;
 	}
 
 	@Override
