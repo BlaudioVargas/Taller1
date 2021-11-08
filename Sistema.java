@@ -322,9 +322,7 @@ public class Sistema implements SistemaIMPL{
 			}
 		}
 		Apariencia skins = new Apariencia(Skin, rareza);
-		Apariencias item = new Apariencias(skins);
-		item.setNext(aux.getSkins());
-		aux.setSkins(item);
+		aux.addSkins(skins);
 		return true;
 	}
 
