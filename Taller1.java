@@ -339,6 +339,8 @@ public class Taller1 {
 			System.out.println("4) Desplegar la cantidad de personajes por cada rol existente");
 			System.out.println("5)Agregar un personaje al juego");
 			System.out.println("6)Agregar una skin");
+			System.out.println("7)Bloquear a un jugador");
+			System.out.println("8)Desplegar cuentas de mayor a menor lvl");
 			System.out.println("0)Salir");
 			String respuesta = sc.nextLine();
 			/*if(respuesta.equals("1")) {
