@@ -201,7 +201,7 @@ public class Taller1 {
 			if(temp==null && aux!=null) {
 				if(user.getBalance()>=975) {
 					Inventario newCharacter = new Inventario(aux,null);
-					newCharacter.setNext(user.getInventario());
+					newCharacter.setNext(temp);
 					user.setInventario(newCharacter);
 					user.setBalance(-975);
 					user.setLVL(1);
@@ -326,11 +326,111 @@ public class Taller1 {
 		}
 		return false;
 	}
-
+				///////////////////////////////////////////////////////////////////////----
 	private static void menuAdmin(SistemaIMPL system) {
+		boolean valido = true;
+		while(valido) {
+			@SuppressWarnings("resource")
+			var sc= new Scanner(System.in);
+			
+			System.out.println("1)Recaudación total por cada rol");
+			System.out.println("2)Recaudación total por cada región");
+			System.out.println("3)Recaudación total por personaje");
+			System.out.println("4) Desplegar la cantidad de personajes por cada rol existente");
+			System.out.println("5)Agregar un personaje al juego");
+			System.out.println("6)Agregar una skin");
+			System.out.println("0)Salir");
+			String respuesta = sc.nextLine();
+			/*if(respuesta.equals("1")) {
+				buySkin(system,user);
+			}
+			else if(respuesta.equals("2")) {
+				buyCharacter(system);		
+			}
+			else if(respuesta.equals("3")) {
+				showSkinNotOwn(system);
+			}
+			else if(respuesta.equals("4")) {
+				showInventory(user);
+			}*/
+			else if(respuesta.equals("5")) {
+				addNewCharacter(system,name);
+				
+			}
+			else if(respuesta.equals("6")) {
+				addNewSkin(system,name);
+			}
+			/*else if(respuesta.equals("7")) {
+				banUser(system);
+			}
+			else if(respuesta.equals("8")) {
+				---(user);
+			}*/
+			else if(respuesta.equals("0")) {
+				valido = false;
+				System.out.println("Saliendo de menu admin");
+			}
+			else {
+				System.out.println("ERROR RESPUESTA NO VALIDA");
+			}
+		}
+	}
 		
+		///////////////////////////////////////////////////////////////////////----
+		
+	private static boolean addNewCharacter(SistemaIMPL system,String name) {
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+		System.out.println("Nombre de personaje a agregar: "+name);
+		boolean continuar=true;
+		String clase ="SUP";
+		while(continuar) {
+			String clasess="SUP/ADC/TOP/MID/JG";
+			String[] clases = clasess.split("/");
+			System.out.println("Indique su rol : SUP / ADC / TOP / MID / JG");
+			clase =sc.nextLine();
+			if(Arrays.asList(clases).contains(clase)) {
+				continuar = false;
+			}
+			else {
+				System.out.println("ERROR ROL NO RECONOCIDO");
+			}
+		}
+		Personaje addNewCharacter= new Personaje(name, clase, 0, skinstemp);
+		//Personaje addNewCharacter= new Personajes(name, clase, skinstemp);
+		Personajes characterstemp = new Personajes(addNewCharacter);
+		characterstemp.setNext(characters);
+		this.characters=characterstemp;
+
+	}
+		
+	private static boolean addNewSkin( SistemaIMPL system,String name,String nameskin ) {
+		@SuppressWarnings("resource")
+		var sc= new Scanner(System.in);
+		System.out.println("Nombre del personaje al que se le desea agregar la skin: "+ name);
+		System.out.println("Nombre del la skin: "+ nameskin);
+		boolean continuar=true;
+		String rarityskin ="M";
+		while(continuar) {
+			String rarityskins="M/D/L/E/N";
+			String[] clases = rarityskins.split("/");
+			System.out.println("Indique la calidad de skin : M / D / L / E / N");
+			rarityskin =sc.nextLine();
+			if(Arrays.asList(clases).contains(rarityskin)) {
+				continuar = false;
+			}
+			else {
+				System.out.println("ERROR CALIDAD NO RECONOCIDA");
+			}
+			
+		}
+		Apariencia addNewSkin = new Apariencia(nameskin, rarityskin);
+		Apariencias skinstemp = new Apariencias(addNewSkin);
+		skinstemp.setNext();
+		this.=skinstemp;
 	}
 
+		///////////////////////////////////////////////////////////////////////----
 	private static Usuario getUsuario(SistemaIMPL system, String seleccion) {
 		Usuarios indice = system.getUsers();
 		while(indice!=null) {
